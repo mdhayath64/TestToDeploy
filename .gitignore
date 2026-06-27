@@ -1,2 +1,13 @@
 node_modules
 .env
+.vs/ProjectSettings.json
+.vs/slnx.sqlite
+.vs/TestToDeploy.slnx/FileContentIndex/5bab7d1c-249d-468f-b241-19ae2e1f034b.vsidx
+.vs/TestToDeploy.slnx/FileContentIndex/9ebec93b-3d6b-440f-9f7f-7e4e61075919.vsidx
+.vs/TestToDeploy.slnx/FileContentIndex/88d5f39c-4046-4e94-ba79-cd39d8ae2acc.vsidx
+.vs/TestToDeploy.slnx/FileContentIndex/332ac446-5e19-4661-9a80-db22a1bec257.vsidx
+.vs/TestToDeploy.slnx/FileContentIndex/7952a37c-256b-4016-8d75-04b067f7f6e1.vsidx
+/package-lock.json
+/.prettierrc
+/tsconfig.json
+/.vs
