@@ -1,57 +1,50 @@
-# _DeployToTest
-# Simple Express.js Project
+"# Health Check API
 
-## How to Run
+A simple FastAPI application for health check endpoints.
 
-1. Install dependencies:
-	```
-	npm install
-	```
-2. Configure `.env`:
-	```
-	PORT=8000
-	MONGODB_URI=mongodb+srv://<username>:<password>@<cluster-url>/?retryWrites=true&w=majority
-	MONGODB_DB_NAME=sample_db
-	MONGODB_COLLECTION_NAME=items
-	```
-3. Start the server:
-	```
-	npm start
-	```
-4. To run on a custom port, change `PORT` in `.env` (for example `3000`) and restart the app.
+## Features
 
-Alternative without `.env`:
-	```
-	# PowerShell
-	$env:PORT=3000; npm start
-	```
-5. Open your browser and go to [http://localhost:8000](http://localhost:8000)
+- **`/health`** - Basic health check with status and timestamp
+- **`/health/detailed`** - Detailed health check including uptime information
+- **`/docs`** - Interactive API documentation (Swagger UI)
 
-You should see:
+## Installation
 
-	 Hello, world!
+```bash
+pip install -r requirements.txt
+```
 
-## APIs
+## Running the Application
 
-1. Get items list:
-	- `GET /api/items`
-	- Optional query: `limit` (default `20`, max `100`)
+```bash
+python main.py
+```
 
-2. Get single item by id:
-	- `GET /api/items/:id`
-	- Example: `/api/items/6652a8b5f0f22eb1b8d5f70c`
+The API will be available at `http://localhost:8000`
 
-3. Add item:
-	- `POST /api/items`
-	- Body: JSON object (non-empty)
-	- Example body:
-	```
-	{
-	  "name": "Sample Item",
-	  "price": 25
-	}
-	```
-	Powershell example:
-	```
-	Invoke-RestMethod -Method Post -Uri "http://localhost:8000/api/items" -ContentType "application/json" -Body '{"name":"Sample Item","price":25}'
- 	```
+## Endpoints
+
+- `GET /` - Root endpoint with available endpoints
+- `GET /health` - Basic health check
+- `GET /health/detailed` - Detailed health check with uptime
+- `GET /docs` - Interactive API documentation
+
+## Example Responses
+
+**GET /health**
+```json
+{
+  "status": "healthy",
+  "timestamp": "2026-05-19T10:30:45.123456"
+}
+```
+
+**GET /health/detailed**
+```json
+{
+  "status": "healthy",
+  "timestamp": "2026-05-19T10:30:45.123456",
+  "uptime_seconds": 125.45,
+  "service": "Health Check API"
+}
+```" 
