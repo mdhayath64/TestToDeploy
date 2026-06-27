@@ -30,3 +30,4 @@ coverage/
 # VS Code settings
 .vscode/
 package-lock.json
+/.vs/TestToDeploy.slnx/FileContentIndex

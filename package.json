@@ -1,0 +1,14 @@
+{
+  "name": "deploytest-express",
+  "version": "1.0.0",
+  "description": "A simple Express.js server",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^4.18.2",
+    "mongodb": "^7.2.0"
+  }
+}
