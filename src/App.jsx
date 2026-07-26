@@ -3,7 +3,7 @@ import React from 'react'
 export default function App() {
   return (
     <div className="app">
-      <h1>Vite + React</h1>
+      <h1>Vite + React CI CD test</h1>
       <p>Sample project scaffolded by Me.</p>
       <button onClick={() => alert('Hello from Vite + React!')}>Click me</button>
     </div>
