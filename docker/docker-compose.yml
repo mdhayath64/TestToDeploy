@@ -1,0 +1,49 @@
+version: "3.8"
+
+volumes:
+    app_data:
+        name: tradestreak
+
+services:
+    tradestreak_app:
+        image: tradestreak_app:development
+        container_name: tradestreak_app
+        build:
+            context: ../
+            dockerfile: docker/dockerfile
+        command: /app/docker/start.sh
+        depends_on:
+            - tradestreak_redis
+            - tradestreak_db
+        env_file:
+            - ../.env
+        ports:
+            - "8000:8000"
+        environment:
+            DJANGO_POSTGRES_HOST: tradestreak_db
+            BROKER_URL: redis://tradestreak_redis:6379
+            CELERY_RESULT_BACKEND: redis://tradestreak_redis:6379
+        networks:
+            - default
+
+    tradestreak_db:
+        image: postgres
+        container_name: tradestreak_db
+        volumes:
+            - app_data:/var/lib/postgresql/data
+        environment:
+            POSTGRES_PASSWORD: saif
+            POSTGRES_USER: postgres
+            POSTGRES_DB: tradestreak_db
+        networks:
+            - default
+
+    tradestreak_redis:
+        container_name: tradestreak_redis
+        image: redis
+        networks:
+            - default
+
+networks:
+    default:
+        name: tradestreak_network

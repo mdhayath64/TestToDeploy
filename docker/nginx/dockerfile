@@ -1,0 +1,26 @@
+FROM nginx:stable as builder
+
+LABEL Author="Saif Ali Khan"
+
+# Remove default Nginx configuration
+RUN rm -r /etc/nginx/conf.d/
+COPY docker/nginx/backend.conf /etc/nginx/conf.d/backend.conf
+
+# Install certbot and dependencies
+RUN apt-get update && apt-get install -y \
+    certbot \
+    python3-certbot-nginx \
+    cron
+
+# Create necessary directories if they do not exist
+RUN mkdir -p /etc/letsencrypt
+
+# Add the cron job for automatic certificate renewal
+RUN crontab -l | { cat; echo "0 12 * * * /usr/bin/certbot renew --quiet"; } | crontab -
+
+# Run certbot to obtain the certificate
+ARG DOMAIN_NAME
+RUN certbot --nginx -d ${DOMAIN_NAME} -m bravionllcltd@gmail.com -n --agree-tos
+
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]

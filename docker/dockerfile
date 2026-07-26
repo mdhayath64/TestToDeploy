@@ -1,0 +1,43 @@
+#base image
+FROM python:3.12-bullseye
+
+#maintainer
+LABEL Author="Saif Ali Khan"
+
+# The enviroment variable ensures that the python output is set straight
+# to the terminal with out buffering it first
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE 1
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends gcc
+
+
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install --no-cache-dir -r /tmp/requirements.txt \
+    && rm -rf /tmp/requirements.txt \
+    && useradd -U app_user \
+    && install -d -m 0755 -o app_user -g app_user /app/static
+
+WORKDIR /app
+
+RUN mkdir -p static_cdn/
+RUN chown -R app_user:app_user static_cdn
+RUN mkdir -p logs/
+RUN chown -R app_user:app_user logs
+RUN mkdir -p gunicorn_logs/
+RUN chown -R app_user:app_user gunicorn_logs
+
+
+
+USER app_user:app_user
+COPY --chown=app_user:app_user . .
+RUN chmod +x docker/*.sh
+
+# Applying the chmod commands to set permissions on nginx.conf and conf.d directory
+# RUN chmod 644 /home/ubuntu/ecommerce/docker/nginx.conf
+# RUN chmod 755 /home/ubuntu/ecommerce/docker/conf.d
+# RUN chmod 644 /home/ubuntu/ecommerce/docker/conf.d/*
+
+ENTRYPOINT [ "/bin/bash","docker/entrypoint.sh" ]
+CMD [ "docker/start.sh" ]
