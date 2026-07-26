@@ -70,3 +70,4 @@ idea/
 /blogs_frontend/migrations
 /blogs_frontend/node_modules
 /.vs
+/venv
