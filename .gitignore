@@ -9,5 +9,5 @@ node_modules
 .vs/TestToDeploy.slnx/FileContentIndex/7952a37c-256b-4016-8d75-04b067f7f6e1.vsidx
 /package-lock.json
 /.prettierrc
-/tsconfig.json
 /.vs
+dist/
